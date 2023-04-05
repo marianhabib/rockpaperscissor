@@ -1,0 +1,54 @@
+.gamename
+{
+    text-align: center;
+}
+.flex-container {
+     display: flex; 
+  }
+#container2
+{
+    padding-top: 20px;
+}
+  .flex-container > div  {
+
+    height: 400px;
+     flex: 1; 
+     text-align: center;
+  }
+
+    #in_cont2, #in_cont1
+  {
+    border-right: 4px solid palevioletred;
+  }
+
+  .img-circle
+  {
+        border-radius: 25%;
+        width: 100px;
+        height: 115px;
+        border: 2px solid #8e9681;
+        padding: 5px;
+    
+  }
+  #gallery, #randomchoice{
+    margin-top: 20%;
+  }
+  .computerchoice > button
+  {
+    background-color: white;
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 15px;
+  }
+
+  .chosen
+  {
+    opacity:0.5; -moz-opacity:0.5; filter:alpha(opacity=50);
+  }
+
+  #winner_ann
+  {text-align: center;
+    color: deeppink;}
+
+ 

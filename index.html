@@ -6,31 +6,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissor</title>
     <script src="script.js"></script>
-    <style src="style.css"></style>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    
+    <div id = "container1" class="gamename">
+            <h1>Rock Paper Scissor </h1>
+    </div>
+    <div id="container2" class="flex-container">
+
+        <div id="in_cont1" class="userchoice">
+            <h2> Choose your option</h2>
+            <div id="gallery" class="flex-container">
+                <div class="placecard" id="rock">
+                        <img id="rock_img" class="img-circle" src="rock.png" alt="" />
+                </div>
+                <div class="placecard" id="paper">
+                        <img id="paper_img"class="img-circle" src="paper.png" alt="" />  
+                     </div>
+                <div class="placecard" id="scissor">
+
+                        <img id="scissor_img" class="img-circle" src="scissors.png" alt="" />
+                </div>
+            </div>
+            </div>
+        <div id="in_cont2" class="results">
+            <h2>Scoreboard</h2>
+            <div style="margin-top: 20%;">
+        <h3>Your score</h3><span id="playerscore"></span>
+        <h3>Computer score</h3><span id="computerscr"></span></div>
+                </div>>
+        <div id="in_cont3" class="computerchoice">
+            <h2> Computer's choice</h2>
+            <div class="placecard" id="randomchoice">
+                    <img id="cmpchoice_img" class="img-circle" src="rps.png" alt="" />
+            </div>
+            <button id="gen_chc">Generate choice</button>
+        </div>
+
+    </div>
+    <h2 id="winner_ann"></h2>
     <script>
+
+        let plyr_choice = "";
+        let cmp_choice = "";
+        let winner = "nobody";
         let plyr_scr = 0;
         let cmptr_scr = 0;
-        let cmptr_choice = "rock";
-        let plyr_choice = "rock";
-        let winner = "nobody";
 
-        for ( i=0; i <= 5 ; i++){
-
-            cmptr_choice = computerchoice();
-            plyr_choice = playerchoice();
-            winner = checkwinner(cmptr_choice,plyr_choice);
-
-            if (winner == "computer"){ cmptr_scr = cmptr_scr + 1;}
-            else if (winner == "player"){ plyr_scr = plyr_scr + 1;}
-}
+        const element = document.getElementById('gen_chc');
+         element.addEventListener('click', function(){ cmp_choice = computerchoice(); updatescore()});
+        const rock_ = document.getElementById('rock');
+        const paper_ = document.getElementById('paper');
+        const scissor_ = document.getElementById('scissor');
+        const imgrock_ = document.getElementById('rock_img');
+        const imgpaper_ = document.getElementById('paper_img');
+        const imgscissor_ = document.getElementById('scissor_img');
+        const imgcmpchc_ = document.getElementById('cmpchoice_img');
        
 
-        if (cmptr_scr > plyr_scr){console.log("computer wins!")}
-        else if( plyr_scr > cmptr_scr){console.log("YOU WIN!") }
-        else { console.log("ITS A DRAW")}
+        rock_.addEventListener('click', function() {imgpaper_.classList.remove('chosen');imgscissor_.classList.remove('chosen');plyr_choice = playerchoice(this, imgrock_);updatescore() });
+        paper_.addEventListener('click', function(){imgrock_.classList.remove('chosen');imgscissor_.classList.remove('chosen');plyr_choice =playerchoice(this , imgpaper_);updatescore()});
+        scissor_.addEventListener('click', function(){imgpaper_.classList.remove('chosen');imgrock_.classList.remove('chosen');plyr_choice =playerchoice(this , imgscissor_);updatescore()});
+       
 
-    </script>
+       function updatescore()
+       {
+
+        if (cmp_choice && plyr_choice){
+        winner = checkwinner(cmp_choice,plyr_choice)
+
+       if (winner == "computer"){ cmptr_scr = cmptr_scr + 1;}
+       else if (winner == "player"){ plyr_scr = plyr_scr + 1;}
+
+       if ((cmptr_scr == 5) || (plyr_scr == 5)){
+         if(cmptr_scr == 5){document.getElementById('winner_ann').textContent  = "Computer is the winner";}
+         else {document.getElementById('winner_ann').textContent  = "You are the winner";}
+         document.getElementById("cmpchoice_img").src = "rps.png"
+
+        cmptr_scr = 0
+        plyr_scr= 0
+       } 
+       document.getElementById('computerscr').textContent  = cmptr_scr;
+       document.getElementById('playerscore').textContent = plyr_scr;
+
+       document.getElementById('rock_img').classList.remove("chosen");
+       document.getElementById('paper_img').classList.remove("chosen");
+       document.getElementById('scissor_img').classList.remove("chosen");
+       plyr_choice = "";
+       cmp_choice="";
+
+       }
+
+
+       }
+
+        
+            </script>
+    
 </body>
 </html>
